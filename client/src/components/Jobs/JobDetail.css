@@ -1,0 +1,116 @@
+/* JobDetail.css */
+.pdf-file {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.download-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.pdf-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.job-detail-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  .job-section {
+    margin-bottom: 20px;
+  }
+
+  .create-another-job-button {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .create-another-job-button button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue */
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .create-another-job-button button:hover {
+    background-color: #0056b3; /* Darker Blue */
+  }
+  
+  
+  .job-detail {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .detail-item {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .status-inprogress {
+    color: #ffc107;
+  }
+  
+  .status-completed {
+    color: #28a745;
+  }
+  
+  .status-pending {
+    color: #dc3545;
+  }
+  
+  .status-dropdown {
+    padding: 2px; /* Add padding to the dropdown */
+    font-size: 13px; /* Set font size */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 2px; /* Add border radius */
+    background-color: #fff; /* Set background color */
+    color: #333; /* Set text color */
+    width: 150px; /* Set width */
+  }
+  
+  .status-dropdown:focus {
+    outline: none; /* Remove focus outline */
+    border-color: #007bff; /* Change border color on focus */
+  }
+  
+  /* Styling for the "Delete Selected Jobs" button */
+.delete-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e74c3c; /* Red color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Styling for the label */
+.label {
+  color: #333; /* Dark gray color */
+  font-weight: bold;
+  display: block; /* Display labels on separate lines */
+  margin-bottom: 5px; /* Add some spacing below the label */
+}

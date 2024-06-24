@@ -1,0 +1,75 @@
+/* adminDashboard.css */
+.admin-dashboard {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .admin-dashboard h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-dashboard ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .admin-dashboard li {
+    margin-bottom: 10px;
+  }
+  
+  .admin-dashboard li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  .admin-dashboard li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* adminJobDetails.css */
+  .admin-job-details {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .admin-job-details h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-job-details ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .admin-job-details li {
+    margin-bottom: 10px;
+  }
+  
+  .admin-job-details div {
+    margin-bottom: 5px;
+  }
+  
+  .admin-job-details div:first-child {
+    font-weight: bold;
+  }
+  
+  .folder-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .folder-icon {
+    margin-right: 10px;
+  }
+  
+  .folder-text {
+    font-size: 18px;
+  }
+  

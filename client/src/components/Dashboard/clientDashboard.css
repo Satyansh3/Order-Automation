@@ -1,0 +1,21 @@
+/* ClientDashboard.css */
+
+.dashboard-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .folder-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .folder-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .folder-text {
+    font-size: 18px;
+  }
+  

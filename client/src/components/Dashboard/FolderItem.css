@@ -1,0 +1,21 @@
+.folder-item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  .folder-item:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .folder-item h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .folder-item p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  

@@ -1,0 +1,75 @@
+.job-list-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .job-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .job-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .job-title {
+    font-weight: bold;
+  }
+  
+  .job-description {
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .job-status.completed {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .job-status.inprogress {
+    background-color: #ffc107;
+    color: #000;
+  }
+  
+  .job-status.pending {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  .download-button {
+    background-color: #007bff; /* Blue */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .download-button:hover {
+    background-color: #0056b3; /* Darker Blue */
+  }
+
+  .job-link {
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Stack items vertically */
+    text-decoration: none; /* Remove default link underline */
+    color: inherit; /* Inherit color from parent */
+  
+    /* Add spacing between items */
+    margin-bottom: 10px;
+  }
+  
