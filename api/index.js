@@ -21,14 +21,6 @@ app.use(express.json());
 app.use(cors())
 
 
-app.use('/xodo-auth', oAuthRoutes, createProxyMiddleware({
-  target: 'https://satyanshsharma.eversign.com',
-  changeOrigin: true,
-  pathRewrite: {
-    '^/xodo-auth': '',
-  }
-}))
-
 // Ever Sign Routes
 app.use('/api/eversign', everSignRoutes); // Mount the everSignRoutes at '/api/eversign'
 

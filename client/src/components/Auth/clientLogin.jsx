@@ -32,7 +32,6 @@ const Login = () => {
         }
         dispatch(addUser(userData))
         dispatch(setUser({ username, email }))
-        localStorage.setItem()
         navigate('../otp-verification');
       }
     } catch (error) {

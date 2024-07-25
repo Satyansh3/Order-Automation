@@ -60,10 +60,7 @@ const JobDetail = ({ userType }) => {
               <span className="value">{job.d}</span>
             </div>
             {userType === 'admin' && job.sF && job.sF.length>0 && (
-              <EsignButton 
-              jobId={job.id} 
-              clientEmail={clientEmail} 
-              documentUrl={(job.sF[0].url).slice(5,)} />
+              <EsignButton />
             )}
             {userType === 'admin' && job.sF && job.sF.length>0 && (
               < div className = "pdf-files" >
@@ -71,6 +68,7 @@ const JobDetail = ({ userType }) => {
                   {job.sF.map((file, index) => (
                     <li key={index} className="pdf-file">
                       <span>{file.name}</span>
+                      <span>{file.url}</span>
                       <button onClick={() => downloadFile(file.url, file.name)} className="download-button">
                         <img src={pdf} alt="PDF icon" className="pdf-icon" height="50px" width="50px"/>
                       </button>
