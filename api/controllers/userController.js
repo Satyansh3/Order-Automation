@@ -4,16 +4,19 @@ import User from "../models/User.js"
 const userController = {
     // Controller to create a new user
     createUser: async (req, res) => {
+        const { email, username } = req.body;
         try {
-            console.log('here1')
-            const { email } = req.body;
-            const newUser = new User({email});
-            console.log('here 2')
-            await newUser.save();
-            res.status(201).json(newUser);
+          let user = await User.findOne({ email });
+          if (!user) {
+            user = new User({ email, username });
+          } else {
+            user.username = username;
+          }
+          await user.save();
+          console.log("User is saved")
+          res.status(201).json(user);
         } catch (error) {
-            console.error(error)
-            res.status(500).json({ error: error.message });
+          res.status(400).json({ error: error.message });
         }
     },
 
@@ -39,7 +42,7 @@ const userController = {
     // Controller to fetch all users
     getAllUsers: async (req, res) => {
         try {
-            const users = await User.find();
+            const users = await User.find({});
             res.status(200).json(users);
         } catch (error) {
             res.status(500).json({ error: error.message });

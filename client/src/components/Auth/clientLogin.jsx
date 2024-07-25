@@ -15,23 +15,27 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const loggedInUser = useSelector(state => state.userReducer)
-  // console.log(loggedInUser)
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      if (loggedInUser.email === email) {
+      if (loggedInUser.username === username && loggedInUser.email === email) {
         dispatch(setUser(loggedInUser))
         navigate("../client-dashboard")
       }
+      else if(loggedInUser.email === email && loggedInUser.username !== username){
+        alert("This username is not associated with this email")
+      }
+      else if(loggedInUser.email !== email && loggedInUser.username === username){
+        alert("This username is invalid")
+      }
       else {
-        await authService.sendOTP(email);
+        await authService.sendOTP(username, email);
         console.log('Done');
-        const userData = {
-          username: username,
-          email: email
-        }
+        const userData = {username, email}
+        const savedUser = await userService.createUser(userData);
+        authService.saveUserSession(savedUser);
         dispatch(addUser(userData))
-        dispatch(setUser({ username, email }))
+        dispatch(setUser(userData))
         navigate('../otp-verification');
       }
     } catch (error) {

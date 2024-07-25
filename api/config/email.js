@@ -2,7 +2,7 @@
 const emailConfig = {
     service: 'Gmail',
     username: 'captaincoolsatyansh@gmail.com',
-    password: 'jvpl sifg hrop dmvq',
+    password: 'nmgg hjfu ozhe yfqd',
     sender: 'Satyansh captaincoolsatyansh@gmail.com'
 }
 export default emailConfig;

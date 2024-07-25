@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addJob } from '../../redux/actions/jobActions';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CreateJob.css';
+import jobService from './../../services/jobService';
 
 const CreateJob = () => {
   const [title, setTitle] = useState('');
@@ -12,17 +13,26 @@ const CreateJob = () => {
   const navigate = useNavigate()
   const users = useSelector(state=>state.userReducer)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log(users)
     e.preventDefault();
     // Dispatch the data to add it in the job list.
+
     const jobData = {
-      t: title,
-      d: description,
-      sF: selectedFolder.map(file => ({ name: file.name, url: URL.createObjectURL(file) })),
+      title,
+      description,
+      files: selectedFolder.map(file => ({ name: file.name, url: URL.createObjectURL(file) })),
+      username: users.username
     }
-    // console.log(dispatch(addJob(jobData)))
-    dispatch(addJob(jobData))
-    navigate(`/jobs?username=${users.username}`);
+    try {
+      console.log("creating job")
+      const savedJob = await jobService.createJob(jobData)
+      console.log(savedJob)
+      dispatch(addJob(savedJob));
+      navigate(`/jobs?username=${users.username}`);
+    } catch (error) {
+      console.error('Failed to create a job', error)
+    }
   };
 
   const handleFolderChange = (e) => {

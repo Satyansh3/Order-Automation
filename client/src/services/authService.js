@@ -1,7 +1,7 @@
 // authService.js
 
 const authService = {
-  verifyOTP: async (email, otpCode) => {
+  verifyOTP: async (username, email, otpCode) => {
     try{
       // Make an API Request to verify OTP
       const response = await fetch('http://localhost:3000/auth/verify-otp', {
@@ -9,7 +9,7 @@ const authService = {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, otpCode})
+        body: JSON.stringify({username, email, otpCode})
       })
       return response
     }
@@ -18,7 +18,7 @@ const authService = {
       throw new Error('cannot verify OTP')
     }
   },
-  sendOTP: async (email) => {
+  sendOTP: async (username, email) => {
     try {
       // Make an API request to send OTP
       const response = await fetch('http://localhost:3000/auth/send-otp', {
@@ -26,7 +26,7 @@ const authService = {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ username, email })
       });
       
       if (!response.ok) {
@@ -40,6 +40,13 @@ const authService = {
       console.error('Error sending OTP:', error.message);
       throw new Error('Failed to send OTP');
     }
+  },
+  saveUserSession: async(user) => {
+    localStorage.setItem('loggedInUser', JSON.stringify(user))
+  },
+  getUserSession: () => {
+    const user = localStorage.getItem('loggedInUser')
+    return user ? JSON.parse(user) : null;
   }
 };
 

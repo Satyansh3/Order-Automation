@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import EnvironmentPlugin from 'vite-plugin-environment'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -9,8 +10,8 @@ export default defineConfig({
         target: 'https://satyanshsharma.eversign.com/oauth/token',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/findToken/, ''),
-      }
+      },
     }
   },
-  plugins: [react()],
+  plugins:[EnvironmentPlugin('all', { prefix: 'VITE_' }),, react()],
 })

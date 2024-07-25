@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 const emailService = {
     // Send OTP Code to user's email
 
-    sendOTPByEmail: async (email, otpCode) => {
+    sendOTPByEmail: async (username, email, otpCode) => {
         const mailOptions = {
             from: emailConfig.sender,
             to: email,

@@ -3,7 +3,9 @@ import "./ESignButton.css"
 
 const EsignButton = ({documentUrl}) => {
 
+
   const handleEsign = async () => {
+    console.log("Document URL", documentUrl)
     console.log("Hi, currently working on it")
     const redirectToOAuth = () => {
       const clientId = '3c48229f1071e3e7b27935efee1f91de'

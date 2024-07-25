@@ -1,12 +1,10 @@
 import express from "express"
-import bodyParser from "body-parser";
 import cors from "cors"
 import connectDB from "./config/database.js"
-import {createProxyMiddleware} from "http-proxy-middleware"
-import oAuthRoutes from "./routes/oAuthRoutes.js"
 import everSignRoutes from "./routes/everSignRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
 import jobRoutes from "./routes/jobRoutes.js"
+import paymentRoutes from "./routes/paymentRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js"
 import userRoutes from "./routes/userRoutes.js"
 import authenticationMiddleware from "./middleware/authentication.js"
@@ -31,6 +29,13 @@ app.use('/auth', authRoutes);
 app.use('/api', userRoutes);
 
 
+// Job routes
+app.use('/jobs', jobRoutes);
+
+app.use('/payment', paymentRoutes)
+
+
+
 
 
 // Authentication middleware for job and admin routes
@@ -38,8 +43,6 @@ app.use(authenticationMiddleware);
 
 
 
-// Job routes
-app.use('/jobs', jobRoutes);
 
 // Authorization middleware for admin routes
 app.use(authorizationMiddleware('admin'));

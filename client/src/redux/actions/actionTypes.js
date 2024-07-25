@@ -2,6 +2,7 @@ export const ADD_JOB = 'ADD_JOB'
 export const SET_USER = 'SET_USER'
 export const ADD_USER = 'ADD_USER'
 export const DELETE_JOB = 'DELETE_JOB'
+export const SET_JOBS = 'SET_JOBS';
 export const GET_JOB_DETAILS = 'GET_JOB_DETAILS'
 export const GET_USER_FOLDERS = 'GET_USER_FOLDERS'
 export const FETCH_USER_FOLDERS_REQUEST = 'FETCH_USER_FOLDERS_REQUEST';

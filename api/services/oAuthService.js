@@ -1,8 +1,4 @@
 
-// const ACCESS_KEY = import.meta.env.VITE_EVERSIGN_API_KEY
-// const BUSINESS_ID = import.meta.env.VITE_BUSINESS_ID
-
-import axios from "axios"
 
 const oAuthService = {
     exchangeCodeForToken: async (code) => {
@@ -20,21 +16,22 @@ const oAuthService = {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
+            console.log(data)
             return data;
         } catch (error) {
-            console.error('Error exchanging code for token:', error.message);
-            throw error;
+            console.error(error)
         }
     },
     getDocuments: async (accessToken) => {
         try {
-            const response = await fetch("https://api.eversign.com/document?access_key=43959ebf8f9bfb24b9c8337e722d3f46&business_id=893686&type=all", {
+            const response = await fetch('https://api.eversign.com/document?access_key=43959ebf8f9bfb24b9c8337e722d3f46&business_id=893686&type=all', {
                 method: "GET",
                 headers: {
                 'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json'
                 }
             })
+            console.log("get document" , response)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.data}`)
             }
@@ -42,21 +39,20 @@ const oAuthService = {
 
             return data;
         } catch (error) {
-            console.error('Error retrieving documents:', error.message);
-            throw error;
+            console.error(error)
         }
     },
-    createDocument: async (accessToken, documentData) => {
+    createDocumentFromTemplate: async (accessToken, documentData) => {
         try {
-            const response = await fetch(`https://eversign.com/document?access_key=43959ebf8f9bfb24b9c8337e722d3f46&business_id=893686`, {
+            const response = await fetch('https://api.eversign.com/document?access_key=43959ebf8f9bfb24b9c8337e722d3f46&business_id=893686', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(documentData)
-            });
-
+            })
+            console.log("Create document",response)
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

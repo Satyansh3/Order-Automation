@@ -16,11 +16,10 @@ const OTPVerification = () => {
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     try {
-      const response = await authService.verifyOTP(users.email, otp)
+      const response = await authService.verifyOTP(users.username, users.email, otp)
       console.log(response)
       if (response.ok) {
         console.log(users.email, users.username)
-        // folderService.createFolder(users.email, users.username)
         console.log('Verification done')
         navigate("../client-dashboard")
       }

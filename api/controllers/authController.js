@@ -9,11 +9,11 @@ import emailService from "../services/emailService.js"
 const authController = {
     sendOTP: async (req, res) => {
         try {
-            const { email } = req.body;        
+            const { username, email } = req.body;        
             // check if user exists            
-            var user = await User.findOne({ email })
+            var user = await User.findOne({ username, email })
             if (!user) {
-                user = new User({email})
+                user = new User({username, email})
             }
             // Generate OTP code
             const otpCode = otpService.generateOTP();
@@ -27,7 +27,7 @@ const authController = {
             await user.save()
 
             //Send OTP Code to user's email
-            await emailService.sendOTPByEmail(email, otpCode)
+            await emailService.sendOTPByEmail(username, email, otpCode)
             console.log('done')
             res.status(200).json({ message: 'OTP sent successfully' })
         } catch (error) {
@@ -38,11 +38,11 @@ const authController = {
     //Verify the OTP Code provided by the user
     verifyOTP: async (req, res) => {
         try {
-            const { email, otpCode } = req.body
+            const { username, email, otpCode } = req.body
             console.log("Email", email)
             console.log("Otp code", otpCode)
             //Check if user exists
-            const user = await User.findOne({ email, otpCode })
+            const user = await User.findOne({ username, email, otpCode })
             console.log(user)
             
             if (!user) {
