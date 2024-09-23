@@ -7,7 +7,7 @@ export default defineConfig({
   server:{
     proxy:{
       '/findToken': {
-        target: 'https://satyanshsharma.eversign.com/oauth/token',
+        target: 'https://your_business_account.eversign.com/oauth/token',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/findToken/, ''),
       },
