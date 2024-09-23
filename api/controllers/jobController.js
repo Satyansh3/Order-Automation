@@ -2,7 +2,7 @@ import Job from "../models/Job.js"
 import User from "../models/User.js";
 const jobController = {
     createJob: async(req,res) => {
-        const { title, description, files, username } = req.body;
+        const { title, description, files, username, email } = req.body;
         console.log(req.body)
         try {
           const user = await User.findOne({username});
@@ -15,6 +15,8 @@ const jobController = {
             description,
             files,
             user: user._id,
+            username: user.username,
+            email: user.email
           });
           await job.save();
 

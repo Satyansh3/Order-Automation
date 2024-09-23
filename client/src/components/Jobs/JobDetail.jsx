@@ -8,12 +8,15 @@ import { Link, useLocation } from 'react-router-dom';
 import EsignButton from '../E-Sign/ESignButton.jsx';
 import pdf from "./free-pdf-icon-3385-thumb.png"
 import jobService from '../../services/jobService.js';
+import paymentService from '../../services/paymentService.js';
 
 const JobDetail = ({ userType }) => {
   const[jobs, setJobs] = useState([])
   const [paymentUrl, setPaymentUrl] = useState('');
   const dispatch = useDispatch();
   const location = useLocation();
+  const [amount, setAmount] = useState({});
+  const [clientEmail, setClientEmail] = useState('2021uee0153@iitjammu.ac.in');
   
   const [selectedJobs, setSelectedJobs] = useState([]);
 
@@ -23,7 +26,9 @@ const JobDetail = ({ userType }) => {
         const params = new URLSearchParams(location.search)
         const username = params.get('username')
         const data = await jobService.getJobsByUsername(username);
+        console.log("Jobs by username : ", data)
         setJobs(data)
+        setClientEmail(data[0].email); 
       } catch (error) {
         console.error('Failed to fetch jobs:', error);
       }
@@ -53,14 +58,33 @@ const JobDetail = ({ userType }) => {
     }
   };
 
-  const handlePayment = async(jobId) => {
+
+  const handlePayment = async (paymentUrl) => {
+    window.location.href = paymentUrl;
+  };
+
+  const handleAmountChange = (jobId, newAmount) => {
+    setAmount((prevAmount) => ({
+      ...prevAmount,
+      [jobId]: newAmount,
+    }));
+  };
+  const handleSendPaymentLink = async (jobId, amount, clientEmail) => {
     try {
-      const url = paymentService.initiatePayment(jobId);
-      setPaymentUrl(url)
+      const paymentLink = await paymentService.initiatePayment(jobId, amount, clientEmail);
+      // await jobService.updateJobPaymentLink(jobId, paymentLink)
+      setJobs((prevJobs) => 
+      prevJobs.map((job) =>
+        job._id === jobId ? { ...job, paymentUrl: paymentUrl } : job
+      )
+    );
+      alert('Payment link sent on clients portal');
     } catch (error) {
-      console.error('Error initiating payment' , error)
+      console.error('Error sending payment link:', error);
+      alert('Failed to send payment link');
     }
-  }
+  };
+
 
   const downloadFile = (fileUrl, fileName) => {
     FileSaver.saveAs(fileUrl, fileName);
@@ -98,18 +122,29 @@ const JobDetail = ({ userType }) => {
               </div>
             )}
             {userType === 'admin' && (
-              <div>
+              <>
+                <textarea
+                  placeholder="Enter amount"
+                  value={amount[job._id] || ''}
+                  onChange={(e) => handleAmountChange(job._id, e.target.value)}
+                />
+                <button
+                  onClick={() => handleSendPaymentLink(job._id, amount[job._id], clientEmail)}
+                  className="send-payment-button"
+                >
+                  Generate Payment Link
+                </button>
                 <input
                   type="checkbox"
                   checked={selectedJobs.includes(job._id)}
                   onChange={() => handleJobSelection(job._id)}
                 />
                 <span className="label">Select for deletion</span>
-              </div>
+              </>
             )}
-            {userType === 'client' && (
-              <button onClick={() => handlePayment(job._id)} className="payment-button">
-                Pay Now
+            {userType === 'client' && job.paymentUrl && (
+              <button onClick={() => handlePayment(job.paymentUrl)} className="payment-button">
+                Make Payment
               </button>
             )}
           </div>
@@ -124,13 +159,6 @@ const JobDetail = ({ userType }) => {
         <Link to={`/jobs/create`} className="create-another-job-button">
           <button className="btn btn-primary">Create Another Job</button>
         </Link>
-      )}
-      {paymentUrl && (
-        <div>
-          <a href={paymentUrl} target="_blank" rel="noopener noreferrer">
-            Proceed to Payment
-          </a>
-        </div>
       )}
     </div>
   );

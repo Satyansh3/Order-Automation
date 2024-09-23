@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addJob } from '../../redux/actions/jobActions';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CreateJob.css';
-import jobService from './../../services/jobService';
+import jobService from './../../services/jobService.js';
 
 const CreateJob = () => {
   const [title, setTitle] = useState('');
@@ -14,7 +14,6 @@ const CreateJob = () => {
   const users = useSelector(state=>state.userReducer)
 
   const handleSubmit = async (e) => {
-    console.log(users)
     e.preventDefault();
     // Dispatch the data to add it in the job list.
 
@@ -22,7 +21,8 @@ const CreateJob = () => {
       title,
       description,
       files: selectedFolder.map(file => ({ name: file.name, url: URL.createObjectURL(file) })),
-      username: users.username
+      username: users.username,
+      email: users.email
     }
     try {
       console.log("creating job")

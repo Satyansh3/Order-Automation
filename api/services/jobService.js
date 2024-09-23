@@ -4,9 +4,9 @@ import Job from "../models/Job.js"
 
 const jobService = {
   // Create a new job
-  createJob: async (title, description, files, userId) => {
+  createJob: async (title, description, files, username, email, userId) => {
     try {
-      const newJob = new Job({ title, description, files, userId });
+      const newJob = new Job({ title, description, files, username, email, userId });
       const savedJob = await newJob.save();
       return savedJob;
     } catch (error) {

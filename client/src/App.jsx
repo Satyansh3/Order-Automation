@@ -11,6 +11,8 @@ import ClientDashboard from "./components/Dashboard/clientDashboard.jsx";
 import AdminDashboard from "./components/Dashboard/adminDashboard.jsx";
 import OAuthButton from "./components/Auth/OAuthButton.jsx";
 import OAuthCallback from "./components/Auth/oAuthCallback.jsx";
+import PaymentSuccess from "./components/PaymentSuccess/paymentSuccess.jsx";
+import PaymentFail from "./components/PaymentSuccess/paymentFail.jsx";
 
 const App = () => {
     return(
@@ -29,6 +31,8 @@ const App = () => {
                     <Route path="/jobs/*" element={<JobDetail userType="client" />} />
                     <Route path="/jobs/create" element={<CreateJob/>}/>
                     <Route path="/admin-dashboard" element={<AdminDashboard/>} />
+                    <Route path="/success?*" element={<PaymentSuccess />} />
+                    <Route path="/fail?*" element={<PaymentFail />} />
                 </Routes>
             </div>
         </Router>

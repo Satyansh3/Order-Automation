@@ -1,0 +1,5 @@
+client/node_modules/
+api/config/payment.json
+client/.env/
+api/config/email.js
+node_modules
