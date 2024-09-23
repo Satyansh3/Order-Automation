@@ -8,8 +8,8 @@ export const initiatePayment = async (jobId, amount) => {
     const response = await axios.post(PAYSTATION_API_URL, {
       paystation: "_empty",
       pstn_nr: 't',
-      pstn_pi: "617661",
-      pstn_gi: "DEVELOPMENT",
+      pstn_pi: VITE_PAYSTATION_ID,
+      pstn_gi: VITE_GATEWAY_ID,
       pstn_ms: uuidv4(),
       pstn_tm: 't',
       pstn_am : amount,
