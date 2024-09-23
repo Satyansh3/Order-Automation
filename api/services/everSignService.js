@@ -5,9 +5,9 @@ import axios from "axios"
 const everSignService = {
     getAccessToken: async(authorizationCode) => {
         try {
-            const response = await axios.post('https://satyanshsharma.eversign.com/oauth/token', {
-                client_id : '3c48229f1071e3e7b27935efee1f91de',
-                client_secret: '674e2bf1216c93bf3578a65ad01e36d7',
+            const response = await axios.post('https://your_business_account.eversign.com/oauth/token', {
+                client_id : VITE_CLIENT_ID,
+                client_secret: VITE_SECRET_KEY,
                 redirect_uri: 'http://localhost:5173/callback',
                 grant_type: 'authorization_code',
                 code: code
@@ -24,15 +24,15 @@ const everSignService = {
             console.log(hash)
             // Make API call to Eversign to initiate e-signature process
             const eversignResponse = await axios.post(
-                'https://satyanshsharma.eversign.com/document',
+                'https://your_business_account.eversign.com/document',
                 {
                     "title": "E-Signature Document",
                     "signers": [
                         {
-                            "email": "captaincoolsatyansh@gmail.com",
+                            "email": "Your_gmail_id",
                             "role":"Admin",
                             "id":1,
-                            "embedded_signing_url" : "https://satyanshsharma.eversign.com/documents?43959ebf8f9bfb24b9c8337e722d3f46&893686&ec1f1163b0857261894a4ea4680829f0f510705ef36ae2ea5a006f6e44e82be8"
+                            "embedded_signing_url" : `https://your_business_account.eversign.com/documents?${VITE_EVERSIGN_API_KEY}&${VITE_BUSINESS_ID}&ec1f1163b0857261894a4ea4680829f0f510705ef36ae2ea5a006f6e44e82be8`
                         }
                     ],
                     "files": [
