@@ -1,8 +1,8 @@
 // Configuration for email service
 const emailConfig = {
     service: 'Gmail',
-    username: 'captaincoolsatyansh@gmail.com',
-    password: 'nmgg hjfu ozhe yfqd',
-    sender: 'Satyansh captaincoolsatyansh@gmail.com'
+    username: 'Your gmail-id',
+    password: 'Password',
+    sender: 'Your_Name Your gmail'
 }
 export default emailConfig;
