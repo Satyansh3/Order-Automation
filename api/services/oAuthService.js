@@ -4,8 +4,8 @@ const oAuthService = {
     exchangeCodeForToken: async (code) => {
         try {
             const formData = new FormData();
-            formData.append('client_id', '3c48229f1071e3e7b27935efee1f91de');
-            formData.append('client_secret', '674e2bf1216c93bf3578a65ad01e36d7');
+            formData.append('client_id', VITE_CLIENT);
+            formData.append('client_secret', VITE_SECRET);
             formData.append('code', code);
 
             const response = await fetch('/findToken', {
@@ -24,7 +24,7 @@ const oAuthService = {
     },
     getDocuments: async (accessToken) => {
         try {
-            const response = await fetch('https://api.eversign.com/document?access_key=43959ebf8f9bfb24b9c8337e722d3f46&business_id=893686&type=all', {
+            const response = await fetch(`https://api.eversign.com/document?access_key=${VITE_EVERSIGN_API_KEY}&business_id=${VITE_BUSINESS_ID}&type=all`, {
                 method: "GET",
                 headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -44,7 +44,7 @@ const oAuthService = {
     },
     createDocumentFromTemplate: async (accessToken, documentData) => {
         try {
-            const response = await fetch('https://api.eversign.com/document?access_key=43959ebf8f9bfb24b9c8337e722d3f46&business_id=893686', {
+            const response = await fetch(`https://api.eversign.com/document?access_key=${VITE_EVERSIGN_API_KEY}&business_id=${VITE_BUSINESS_ID}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${accessToken}`,
@@ -66,7 +66,7 @@ const oAuthService = {
     },
     listBusinesses: async() => {
         try {
-            const response = await fetch("https://api.eversign.com/business?access_key=43959ebf8f9bfb24b9c8337e722d3f46")
+            const response = await fetch(`https://api.eversign.com/business?access_key=${VITE_EVERSIGN_API_KEY}`)
             const data = await response.json()
             return data
         } catch (error) {
